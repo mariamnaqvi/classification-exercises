@@ -61,13 +61,4 @@ def prep_iris_data(df):
     iris_df = iris_df.rename(columns={"species_name": "species"})
     train, test = train_test_split(iris_df, test_size= 0.2, random_state= 1349, stratify = iris_df.species)
     train, validate = train_test_split(train, train_size= 0.7, random_state=1349, stratify = train.species)
-    dummy_train = pd.get_dummies(train[['species']], drop_first= True)
-    dummy_validate = pd.get_dummies(validate[['species']], drop_first= True)
-    dummy_test = pd.get_dummies(test[['species']], drop_first= True)
-    train = pd.concat([train, dummy_train], axis = 1)
-    validate = pd.concat([validate, dummy_validate], axis = 1)
-    test = pd.concat([test, dummy_test], axis = 1)
-    train = train.drop(columns = ['species'])
-    validate = validate.drop(columns = ['species'])
-    test = test.drop(columns = ['species'])
     return train, validate, test
